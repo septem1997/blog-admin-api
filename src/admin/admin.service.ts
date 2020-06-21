@@ -41,8 +41,14 @@ export class AdminService {
 
   }
 
-  findAll(): Promise<Admin[]> {
-    return this.adminRepository.find();
+  async getAdminList(): Promise<any> {
+    const query = new Admin()
+    const list = await this.adminRepository.find(query);
+    return {
+      code: 0,
+      msg: '成功',
+      data:list
+    }
   }
 
   findOne(id: string): Promise<Admin> {

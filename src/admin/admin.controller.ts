@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { AdminService } from './admin.service';
 import { CreateAdminDto } from './dto/create-admin.dto';
 
@@ -6,6 +6,11 @@ import { CreateAdminDto } from './dto/create-admin.dto';
 export class AdminController {
 
   constructor(private readonly service: AdminService) {
+  }
+
+  @Get('')
+  async getAdminList():Promise<any>{
+    return this.service.getAdminList()
   }
 
   @Post('edit')
