@@ -10,13 +10,4 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
-
-  @Post('login')
-  login(@Body() body): string {
-    if (body.username&&body.password){
-      return body;
-    }else {
-      return this.appService.loginInfoEmpty()
-    }
-  }
 }
