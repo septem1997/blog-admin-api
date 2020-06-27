@@ -1,6 +1,9 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { AdminService } from './admin.service';
 import { CreateAdminDto } from './dto/create-admin.dto';
+import { Result } from '../util/result';
+import { AuthGuard } from '@nestjs/passport';
+import { LocalAuthGuard } from '../auth/local-auth.guard';
 
 @Controller('admin')
 export class AdminController {
@@ -9,6 +12,7 @@ export class AdminController {
   }
 
   @Get('')
+  @UseGuards(AuthGuard('jwt'))
   async getAdminList():Promise<any>{
     return this.service.getAdminList()
   }
@@ -18,23 +22,17 @@ export class AdminController {
     if (createAdminDto.username && createAdminDto.password) {
       return this.service.create(createAdminDto)
     } else {
-      return {
-        code: 1001,
-        msg: '请输入账号和密码',
-        data: null
-      }
+      return Result.login_pleaseEnter()
     }
   }
 
   @Post('login')
+  @UseGuards(LocalAuthGuard)
   login(@Body() createAdminDto:CreateAdminDto): any {
     if (createAdminDto.username&&createAdminDto.password){
       return this.service.login(createAdminDto)
     }else {
-      return {
-        code: 1001,
-        msg: '请输入账号和密码'
-      }
+      return Result.login_pleaseEnter()
     }
   }
 }

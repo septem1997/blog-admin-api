@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Admin } from './admin/admin.entity';
 import { AdminService } from './admin/admin.service';
 import {AdminModule} from './admin/admin.module'
+import { AuthModule } from './auth/auth.module';
 
 
 @Module({
@@ -20,7 +21,8 @@ import {AdminModule} from './admin/admin.module'
       entities: [Admin],
       synchronize: true,
     }),
-    AdminModule
+    AdminModule,
+    AuthModule
   ],
   controllers: [AppController, AdminController],
   providers: [AppService, AdminService],
