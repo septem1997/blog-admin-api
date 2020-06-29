@@ -5,15 +5,13 @@ import { Admin } from './admin.entity';
 import { CreateAdminDto } from './dto/create-admin.dto';
 import * as bcrypt from 'bcrypt';
 import { Result } from '../util/result';
-import { AuthService } from '../auth/auth.service';
 
 @Injectable()
 export class AdminService {
 
   constructor(
     @InjectRepository(Admin)
-    private adminRepository: Repository<Admin>,
-    private authService: AuthService
+    private adminRepository: Repository<Admin>
   ) {}
 
   register(pass: string):Promise<string> {
@@ -55,7 +53,5 @@ export class AdminService {
     await this.adminRepository.delete(id);
   }
 
-  async login(createAdminDto: CreateAdminDto):Promise<any> {
-    return this.authService.validateUser(createAdminDto)
-  }
+
 }

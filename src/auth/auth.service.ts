@@ -12,8 +12,12 @@ export class AuthService {
     private readonly  adminService: AdminService,
   ) {}
 
-  async validateUser(createAdminDto:CreateAdminDto): Promise<any> {
-    const findAdmin = await this.adminService.findOne(createAdminDto)
+  validateUser(createAdminDto:CreateAdminDto):Promise<any>{
+    return this.adminService.findOne(createAdminDto)
+  }
+
+  async login(createAdminDto:CreateAdminDto): Promise<any> {
+    const findAdmin = await this.validateUser(createAdminDto)
     if (findAdmin){
       const pwdIsCorrect = await bcrypt.compare(createAdminDto.password, findAdmin.password)
       if (pwdIsCorrect){
