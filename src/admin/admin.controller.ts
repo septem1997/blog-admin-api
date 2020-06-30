@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards,Query } from '@nestjs/common';
 import { AdminService } from './admin.service';
 import { CreateAdminDto } from './dto/create-admin.dto';
 import { Result } from '../util/result';
@@ -24,6 +24,12 @@ export class AdminController {
     } else {
       return Result.login_pleaseEnter()
     }
+  }
+
+  @Post('delete')
+  @UseGuards(AuthGuard('jwt'))
+  async delete(@Query('id') id:number): Promise<any> {
+    return this.service.deleteOne(id)
   }
 
 }

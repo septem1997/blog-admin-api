@@ -36,6 +36,11 @@ export class AdminService {
 
   }
 
+  async deleteOne(id: number): Promise<any> {
+    await this.adminRepository.delete(id)
+    return Result.success()
+  }
+
   async findOne(createAdminDto: CreateAdminDto):Promise<Admin> {
     const query = new Admin()
     query.username = createAdminDto.username
