@@ -48,7 +48,6 @@ export class AdminService {
   }
 
   async getAdminList(createAdminDto:CreateAdminDto): Promise<any> {
-    console.log(createAdminDto.pageSize)
     const res = await this.adminRepository.createQueryBuilder('admin')
       .skip(createAdminDto.pageSize * (createAdminDto.pageNum - 1))
       .take(createAdminDto.pageSize)
