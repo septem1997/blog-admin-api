@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, UseGuards,Query } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards, Query, Param } from '@nestjs/common';
 import { AdminService } from './admin.service';
 import { CreateAdminDto } from './dto/create-admin.dto';
 import { Result } from '../util/result';
@@ -12,7 +12,7 @@ export class AdminController {
 
   @Get('')
   @UseGuards(AuthGuard('jwt'))
-  async getAdminList(@Body() createAdminDto:CreateAdminDto):Promise<any>{
+  async getAdminList(@Query() createAdminDto:CreateAdminDto):Promise<any>{
     return this.service.getAdminList(createAdminDto)
   }
 
