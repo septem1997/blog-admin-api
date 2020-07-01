@@ -12,8 +12,8 @@ export class AdminController {
 
   @Get('')
   @UseGuards(AuthGuard('jwt'))
-  async getAdminList():Promise<any>{
-    return this.service.getAdminList()
+  async getAdminList(@Body() createAdminDto:CreateAdminDto):Promise<any>{
+    return this.service.getAdminList(createAdminDto)
   }
 
   @Post('edit')

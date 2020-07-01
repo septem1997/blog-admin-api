@@ -7,6 +7,10 @@ import { Admin } from './admin/admin.entity';
 import { AdminService } from './admin/admin.service';
 import {AdminModule} from './admin/admin.module'
 import { AuthModule } from './auth/auth.module';
+import { Menu } from './menu/menu.entity';
+import { MenuController } from './menu/menu.controller';
+import { MenuService } from './menu/menu.service';
+import { MenuModule } from './menu/menu.module';
 
 
 @Module({
@@ -18,13 +22,14 @@ import { AuthModule } from './auth/auth.module';
       username: 'root',
       password: 'root123456',
       database: 'blog-admin',
-      entities: [Admin],
+      entities: [Admin,Menu],
       synchronize: true,
     }),
     AdminModule,
-    AuthModule
+    AuthModule,
+    MenuModule
   ],
-  controllers: [AppController, AdminController],
-  providers: [AppService, AdminService],
+  controllers: [AppController, AdminController, MenuController],
+  providers: [AppService, AdminService,MenuService],
 })
 export class AppModule {}

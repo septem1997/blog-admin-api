@@ -53,5 +53,13 @@ export class Result{
     }
   }
 
+  @fillRes
+  static menu_pleaseEnter(){
+    return{
+      code: 2001,
+      msg: '请输入路径和标题'
+    }
+  }
+
 
 }

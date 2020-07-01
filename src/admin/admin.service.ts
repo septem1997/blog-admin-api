@@ -47,15 +47,16 @@ export class AdminService {
     return await this.adminRepository.findOne(query)
   }
 
-  async getAdminList(): Promise<any> {
-    const query = new Admin()
-    const list = await this.adminRepository.find(query);
-    return Result.success(list)
-  }
-
-
-  async remove(id: string): Promise<void> {
-    await this.adminRepository.delete(id);
+  async getAdminList(createAdminDto:CreateAdminDto): Promise<any> {
+    console.log(createAdminDto.pageSize)
+    const res = await this.adminRepository.createQueryBuilder('admin')
+      .skip(createAdminDto.pageSize * (createAdminDto.pageNum - 1))
+      .take(createAdminDto.pageSize)
+      .getManyAndCount()
+    return Result.success({
+      list:res[0],
+      total:res[1]
+    })
   }
 
 
