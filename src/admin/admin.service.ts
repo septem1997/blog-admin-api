@@ -36,6 +36,12 @@ export class AdminService {
 
   }
 
+  async updatePassword(admin: Admin, newPwd: string) {
+    admin.password = await this.register(newPwd)
+    await this.adminRepository.save(admin)
+    return Result.success()
+  }
+
   async deleteBy(ids: Array<number>): Promise<any> {
     await this.adminRepository.delete(ids)
     return Result.success()
@@ -53,7 +59,7 @@ export class AdminService {
       .take(createAdminDto.pageSize)
       .getManyAndCount()
     return Result.success({
-      list:res[0],
+      list:res[0].map(item => ({username:item.username,id:item.id})),
       total:res[1]
     })
   }

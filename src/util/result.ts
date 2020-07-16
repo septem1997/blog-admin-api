@@ -62,4 +62,13 @@ export class Result{
   }
 
 
+  @fillRes
+  static app_pwdError(){
+    return{
+      code: 3001,
+      msg: '密码不正确'
+    }
+  }
+
+
 }
