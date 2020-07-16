@@ -20,6 +20,6 @@ export class Menu {
   @OneToMany(type => Menu, menu => menu.parent)
   children:Menu[]
 
-  @Column({ default: true })
+  @Column({ default: true,select:false })
   isActive: boolean;
 }

@@ -25,8 +25,7 @@ export class MenuService {
       if (createMenuDto.parentId&&createMenuDto.parentId!==0){
         const query  = new Menu()
         query.id = createMenuDto.parentId
-        const parent = await this.adminRepository.findOne(query)
-        menu.parent = parent
+        menu.parent = await this.adminRepository.findOne(query)
       }
     }
     menu.name = createMenuDto.name
@@ -42,8 +41,14 @@ export class MenuService {
   }
 
   async getMenuList(): Promise<any> {
-    const query = new Menu()
-    const list = await this.adminRepository.find(query);
+    const list = await this.adminRepository.createQueryBuilder('menu')
+      .where('menu.parentId is null')
+      .getMany();
+    for (const menu of list){
+      menu.children = await this.adminRepository.createQueryBuilder('menu')
+        .where('menu.parentId = :id',{id:menu.id})
+        .getMany()
+    }
     return Result.success(list)
   }
 

@@ -55,11 +55,12 @@ export class AdminService {
 
   async getAdminList(createAdminDto:CreateAdminDto): Promise<any> {
     const res = await this.adminRepository.createQueryBuilder('admin')
+      .select(['admin.id','admin.username'])
       .skip(createAdminDto.pageSize * (createAdminDto.pageNum - 1))
       .take(createAdminDto.pageSize)
       .getManyAndCount()
     return Result.success({
-      list:res[0].map(item => ({username:item.username,id:item.id})),
+      list:res[0],
       total:res[1]
     })
   }
