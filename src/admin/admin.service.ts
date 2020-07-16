@@ -36,8 +36,8 @@ export class AdminService {
 
   }
 
-  async deleteOne(id: number): Promise<any> {
-    await this.adminRepository.delete(id)
+  async deleteBy(ids: Array<number>): Promise<any> {
+    await this.adminRepository.delete(ids)
     return Result.success()
   }
 

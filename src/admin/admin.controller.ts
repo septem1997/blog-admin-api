@@ -28,8 +28,8 @@ export class AdminController {
 
   @Post('delete')
   @UseGuards(AuthGuard('jwt'))
-  async delete(@Query('id') id:number): Promise<any> {
-    return this.service.deleteOne(id)
+  async delete(@Body('ids') ids:Array<number>): Promise<any> {
+    return this.service.deleteBy(ids)
   }
 
 }
