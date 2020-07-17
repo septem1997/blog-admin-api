@@ -70,5 +70,13 @@ export class Result{
     }
   }
 
+  @fillRes
+  static article_plzEnter(){
+    return{
+      code: 3001,
+      msg: '请填写标题和内容'
+    }
+  }
+
 
 }
