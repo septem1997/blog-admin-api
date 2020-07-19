@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Post, Query, Param, UseGuards } from '@nestjs/common';
-import { ArticleService } from './Article.service';
+import { ArticleService } from './article.service';
 import { Result } from '../util/result';
 import { AuthGuard } from '@nestjs/passport';
 import { CreateArticleDto } from './dto/create-article.dto';
