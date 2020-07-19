@@ -15,10 +15,14 @@ import { Article } from './article/article.entity';
 import { ArticleController } from './article/article.controller';
 import { ArticleService } from './article/article.service';
 import { ArticleModule } from './article/article.module';
+import { ConfigModule } from '@nestjs/config';
 
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      envFilePath: ['.env.local', '.env'],
+    }),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
