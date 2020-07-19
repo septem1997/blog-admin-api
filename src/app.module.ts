@@ -5,12 +5,16 @@ import { AdminController } from './admin/admin.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Admin } from './admin/admin.entity';
 import { AdminService } from './admin/admin.service';
-import {AdminModule} from './admin/admin.module'
+import { AdminModule } from './admin/admin.module';
 import { AuthModule } from './auth/auth.module';
 import { Menu } from './menu/menu.entity';
 import { MenuController } from './menu/menu.controller';
 import { MenuService } from './menu/menu.service';
 import { MenuModule } from './menu/menu.module';
+import { Article } from './article/article.entity';
+import { ArticleController } from './article/article.controller';
+import { ArticleService } from './article/article.service';
+import { ArticleModule } from './article/article.module';
 
 
 @Module({
@@ -22,14 +26,30 @@ import { MenuModule } from './menu/menu.module';
       username: 'root',
       password: 'root123456',
       database: 'blog-admin',
-      entities: [Admin,Menu],
+      entities: [
+        Admin,
+        Menu,
+        Article
+      ],
       synchronize: true,
     }),
     AdminModule,
     AuthModule,
-    MenuModule
+    MenuModule,
+    ArticleModule,
   ],
-  controllers: [AppController, AdminController, MenuController],
-  providers: [AppService, AdminService,MenuService],
+  controllers: [
+    AppController,
+    AdminController,
+    MenuController,
+    ArticleController
+  ],
+  providers: [
+    AppService,
+    AdminService,
+    MenuService,
+    ArticleService
+  ],
 })
-export class AppModule {}
+export class AppModule {
+}

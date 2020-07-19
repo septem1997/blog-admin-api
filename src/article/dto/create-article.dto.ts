@@ -5,4 +5,5 @@ export class CreateArticleDto extends Pageable{
   title:string;
   content:string;
   createAt:number;
+
 }

@@ -14,7 +14,7 @@ export class Article {
   @Column({type:'datetime'})
   createTime:string;
 
-  @Column()
+  @Column({default:0})
   viewNum:number;
 
 

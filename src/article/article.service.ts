@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { Article } from './article.entity';
 import { CreateArticleDto } from './dto/create-article.dto';
 import { Result } from '../util/result';
-import moment from 'moment';
+import * as moment from 'moment';
 
 @Injectable()
 export class ArticleService {
@@ -25,7 +25,7 @@ export class ArticleService {
     }
     article.content = createArticleDto.content
     article.title = createArticleDto.title
-    article.createTime = moment().format('YYYY-MM-DD HH:MM:SS')
+    article.createTime = moment(new Date()).format('YYYY-MM-DD HH:MM:SS').toString()
     await this.repository.save(article)
     return Result.success()
   }
@@ -36,15 +36,20 @@ export class ArticleService {
   }
 
   async getArticle(id:number){
-    return Result.success(this.repository.findOne(id))
+    return Result.success(await this.repository.findOne(id))
   }
 
 
-  async getArticleList(createArticleDto: CreateArticleDto): Promise<any> {
-    const res = await this.repository.createQueryBuilder('article')
+  async getArticleList(articleDto: CreateArticleDto): Promise<any> {
+    const qb =  this.repository.createQueryBuilder('article')
       .select(['article.id','article.title','article.viewNum','article.createTime'])
-      .skip(createArticleDto.pageSize * (createArticleDto.pageNum - 1))
-      .take(createArticleDto.pageSize)
+      if (articleDto.title){
+        qb.andWhere('article.title like :title', { title: `%${articleDto.title}%` })
+      }
+      const res = await qb
+      .skip(articleDto.pageSize * (articleDto.pageNum - 1))
+      .take(articleDto.pageSize)
+      .orderBy(articleDto.sortField,articleDto.sortValue)
       .getManyAndCount()
     return Result.success({
       list:res[0],

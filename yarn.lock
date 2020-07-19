@@ -525,29 +525,29 @@
     webpack "4.43.0"
     webpack-node-externals "1.7.2"
 
-"@nestjs/common@^7.0.0":
-  version "7.1.3"
-  resolved "https://registry.npm.taobao.org/@nestjs/common/download/@nestjs/common-7.1.3.tgz#e89ec4891cf2219cfb943d0f46dcbfd583da757c"
-  integrity sha1-6J7EiRzyIZz7lD0PRty/1YPadXw=
+"@nestjs/common@^7.3.2":
+  version "7.3.2"
+  resolved "https://registry.npm.taobao.org/@nestjs/common/download/@nestjs/common-7.3.2.tgz#ce9e63085cf74948f00a167c4b55243c288b5eaa"
+  integrity sha1-zp5jCFz3SUjwChZ8S1UkPCiLXqo=
   dependencies:
     axios "0.19.2"
     cli-color "2.0.0"
-    iterare "1.2.0"
+    iterare "1.2.1"
     tslib "2.0.0"
-    uuid "8.0.0"
+    uuid "8.2.0"
 
-"@nestjs/core@^7.0.0":
-  version "7.1.3"
-  resolved "https://registry.npm.taobao.org/@nestjs/core/download/@nestjs/core-7.1.3.tgz#a6320277c8693c4b82b35435df392214eeadc08c"
-  integrity sha1-pjICd8hpPEuCs1Q13zkiFO6twIw=
+"@nestjs/core@^7.3.2":
+  version "7.3.2"
+  resolved "https://registry.npm.taobao.org/@nestjs/core/download/@nestjs/core-7.3.2.tgz?cache=0&sync_timestamp=1594617389566&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40nestjs%2Fcore%2Fdownload%2F%40nestjs%2Fcore-7.3.2.tgz#64b4eebcfcf7beb909504b1a74fc89fc6ecc7e26"
+  integrity sha1-ZLTuvPz3vrkJUEsadPyJ/G7MfiY=
   dependencies:
     "@nuxtjs/opencollective" "0.2.2"
     fast-safe-stringify "2.0.7"
-    iterare "1.2.0"
+    iterare "1.2.1"
     object-hash "2.0.3"
     path-to-regexp "3.2.0"
     tslib "2.0.0"
-    uuid "8.0.0"
+    uuid "8.2.0"
 
 "@nestjs/jwt@^7.0.0":
   version "7.0.0"
@@ -562,10 +562,10 @@
   resolved "https://registry.npm.taobao.org/@nestjs/passport/download/@nestjs/passport-7.0.0.tgz#c59617779b7e5888a0c72039a6980e28fd659518"
   integrity sha1-xZYXd5t+WIigxyA5ppgOKP1llRg=
 
-"@nestjs/platform-express@^7.0.0":
-  version "7.1.3"
-  resolved "https://registry.npm.taobao.org/@nestjs/platform-express/download/@nestjs/platform-express-7.1.3.tgz#0af9399082995ce8eae409593b9f1aa649e16ca1"
-  integrity sha1-Cvk5kIKZXOjq5AlZO58apknhbKE=
+"@nestjs/platform-express@^7.3.2":
+  version "7.3.2"
+  resolved "https://registry.npm.taobao.org/@nestjs/platform-express/download/@nestjs/platform-express-7.3.2.tgz#82175751e2d776e854efe48316efa0564bb36352"
+  integrity sha1-ghdXUeLXduhU7+SDFu+gVkuzY1I=
   dependencies:
     body-parser "1.19.0"
     cors "2.8.5"
@@ -3996,10 +3996,10 @@ istanbul-reports@^3.0.2:
     html-escaper "^2.0.0"
     istanbul-lib-report "^3.0.0"
 
-iterare@1.2.0:
-  version "1.2.0"
-  resolved "https://registry.npm.taobao.org/iterare/download/iterare-1.2.0.tgz#7427f5ed45986e4b73e2fea903579f1117f3dd15"
-  integrity sha1-dCf17UWYbktz4v6pA1efERfz3RU=
+iterare@1.2.1:
+  version "1.2.1"
+  resolved "https://registry.npm.taobao.org/iterare/download/iterare-1.2.1.tgz#139c400ff7363690e33abffa33cbba8920f00042"
+  integrity sha1-E5xAD/c2NpDjOr/6M8u6iSDwAEI=
 
 jest-changed-files@^26.0.1:
   version "26.0.1"
@@ -7282,15 +7282,15 @@ utils-merge@1.0.1:
   resolved "https://registry.npm.taobao.org/utils-merge/download/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
   integrity sha1-n5VxD1CiZ5R7LMwSR0HBAoQn5xM=
 
-uuid@8.0.0:
-  version "8.0.0"
-  resolved "https://registry.npm.taobao.org/uuid/download/uuid-8.0.0.tgz#bc6ccf91b5ff0ac07bbcdbf1c7c4e150db4dbb6c"
-  integrity sha1-vGzPkbX/CsB7vNvxx8ThUNtNu2w=
-
 uuid@8.1.0:
   version "8.1.0"
   resolved "https://registry.npm.taobao.org/uuid/download/uuid-8.1.0.tgz#6f1536eb43249f473abc6bd58ff983da1ca30d8d"
   integrity sha1-bxU260Mkn0c6vGvVj/mD2hyjDY0=
+
+uuid@8.2.0:
+  version "8.2.0"
+  resolved "https://registry.npm.taobao.org/uuid/download/uuid-8.2.0.tgz?cache=0&sync_timestamp=1592944373333&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fuuid%2Fdownload%2Fuuid-8.2.0.tgz#cb10dd6b118e2dada7d0cd9730ba7417c93d920e"
+  integrity sha1-yxDdaxGOLa2n0M2XMLp0F8k9kg4=
 
 uuid@^3.3.2:
   version "3.4.0"
