@@ -40,7 +40,6 @@ export class AppController {
   @UseInterceptors(FileInterceptor('file'))
   async upload(@UploadedFile() file): Promise<any> {
     const fileName = uuidv4()+'_'+file.originalname;
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const fs = require('fs-extra'),ObsClient = require('esdk-obs-nodejs')
     await fs.writeFileSync(fileName, file.buffer)
     const obsClient = new ObsClient({

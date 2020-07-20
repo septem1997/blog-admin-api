@@ -4,7 +4,6 @@ import { Repository } from 'typeorm';
 import { Article } from './article.entity';
 import { CreateArticleDto } from './dto/create-article.dto';
 import { Result } from '../util/result';
-import * as moment from 'moment';
 
 @Injectable()
 export class ArticleService {
@@ -16,7 +15,7 @@ export class ArticleService {
 
 
   async edit(createArticleDto: CreateArticleDto): Promise<any> {
-
+    const moment = require('moment'); // require
     let article = new Article()
     if (createArticleDto.id){  //区分编辑和新增
       article = await this.repository.createQueryBuilder('article')
@@ -25,7 +24,7 @@ export class ArticleService {
     }
     article.content = createArticleDto.content
     article.title = createArticleDto.title
-    article.createTime = moment(new Date()).format('YYYY-MM-DD HH:MM:SS').toString()
+    article.createTime = moment().format('YYYY-MM-DD HH:mm:ss')
     await this.repository.save(article)
     return Result.success()
   }
