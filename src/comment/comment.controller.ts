@@ -11,7 +11,7 @@ export class CommentController {
   }
 
   @Get('')
-  // @UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthGuard('jwt'))
   async getCommentList(@Query() createCommentDto: CreateCommentDto):Promise<any>{
     return this.service.getCommentList(createCommentDto)
   }
