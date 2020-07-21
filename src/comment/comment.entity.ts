@@ -1,14 +1,12 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
-import { Comment } from '../comment/comment.entity';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, OneToOne, JoinColumn, ManyToOne } from 'typeorm';
+import { User } from '../user/user.entity';
+import { Article } from '../article/article.entity';
 const moment = require('moment');
 
 @Entity()
-export class Article {
+export class Comment {
   @PrimaryGeneratedColumn()
   id: number;
-
-  @Column()
-  title: string;
 
   @Column({type:'text'})
   content: string;
@@ -23,12 +21,9 @@ export class Article {
     }})
   createTime:string;
 
-  @Column({default:0})
-  viewNum:number;
+  @ManyToOne(type => User,user => user.comments)
+  user:User
 
-  @OneToMany(type => Comment,comment => comment.user)
-  comments:Comment[]
-
-
-
+  @ManyToOne(type => Article, article => article.comments)
+  article:Article
 }

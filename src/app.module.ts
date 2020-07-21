@@ -16,6 +16,14 @@ import { ArticleController } from './article/article.controller';
 import { ArticleService } from './article/article.service';
 import { ArticleModule } from './article/article.module';
 import { ConfigModule } from '@nestjs/config';
+import { Comment } from './comment/comment.entity';
+import { User } from './user/user.entity';
+import { UserModule } from './user/user.module';
+import { CommentModule } from './comment/comment.module';
+import { UserController } from './user/user.controller';
+import { CommentController } from './comment/comment.controller';
+import { UserService } from './user/user.service';
+import { CommentService } from './comment/comment.service';
 
 
 @Module({
@@ -33,7 +41,9 @@ import { ConfigModule } from '@nestjs/config';
       entities: [
         Admin,
         Menu,
-        Article
+        Article,
+        Comment,
+        User
       ],
       synchronize: true,
     }),
@@ -41,18 +51,24 @@ import { ConfigModule } from '@nestjs/config';
     AuthModule,
     MenuModule,
     ArticleModule,
+    UserModule,
+    CommentModule
   ],
   controllers: [
     AppController,
     AdminController,
     MenuController,
-    ArticleController
+    ArticleController,
+    UserController,
+    CommentController
   ],
   providers: [
     AppService,
     AdminService,
     MenuService,
-    ArticleService
+    ArticleService,
+    UserService,
+    CommentService
   ],
 })
 export class AppModule {

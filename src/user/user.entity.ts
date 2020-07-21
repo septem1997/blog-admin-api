@@ -3,15 +3,15 @@ import { Comment } from '../comment/comment.entity';
 const moment = require('moment');
 
 @Entity()
-export class Article {
+export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  title: string;
+  username: string;
 
-  @Column({type:'text'})
-  content: string;
+  @Column({select:false})
+  password: string;
 
   @Column({type:"datetime", transformer:{
       from(value: any): any {
@@ -23,12 +23,6 @@ export class Article {
     }})
   createTime:string;
 
-  @Column({default:0})
-  viewNum:number;
-
   @OneToMany(type => Comment,comment => comment.user)
   comments:Comment[]
-
-
-
 }
