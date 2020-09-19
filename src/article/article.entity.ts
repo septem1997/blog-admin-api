@@ -10,6 +10,9 @@ export class Article {
   @Column()
   title: string;
 
+  @Column()
+  summary: string;
+
   @Column({type:'text'})
   content: string;
 

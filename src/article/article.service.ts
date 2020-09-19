@@ -24,6 +24,7 @@ export class ArticleService {
     }
     article.content = createArticleDto.content
     article.title = createArticleDto.title
+    article.summary = createArticleDto.summary
     article.createTime = moment().format('YYYY-MM-DD HH:mm:ss')
     await this.repository.save(article)
     return Result.success()
