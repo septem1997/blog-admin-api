@@ -42,7 +42,7 @@ export class ArticleService {
 
   async getArticleList(articleDto: CreateArticleDto): Promise<any> {
     const qb =  this.repository.createQueryBuilder('article')
-      .select(['article.id','article.title','article.viewNum','article.createTime'])
+      .select(['article.id','article.title','article.summary','article.viewNum','article.createTime'])
       if (articleDto.title){
         qb.andWhere('article.title like :title', { title: `%${articleDto.title}%` })
       }
