@@ -5,5 +5,6 @@ export class CreateArticleDto extends Pageable{
   title:string;
   content:string;
   createTime:number;
-  summary:string
+  summary:string;
+  tagIds:number[]
 }

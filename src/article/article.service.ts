@@ -4,6 +4,8 @@ import { Repository } from 'typeorm';
 import { Article } from './article.entity';
 import { CreateArticleDto } from './dto/create-article.dto';
 import { Result } from '../util/result';
+import { TagService } from '../tag/tag.service';
+
 const moment = require('moment');
 
 @Injectable()
@@ -11,7 +13,8 @@ export class ArticleService {
 
   constructor(
     @InjectRepository(Article)
-    private repository: Repository<Article>
+    private repository: Repository<Article>,
+    private tagService: TagService
   ) {}
 
 
@@ -24,6 +27,9 @@ export class ArticleService {
     }
     article.content = createArticleDto.content
     article.title = createArticleDto.title
+    if (createArticleDto.tagIds){
+      article.tags = await this.tagService.getTagByIds(createArticleDto.tagIds)
+    }
     article.summary = createArticleDto.summary
     article.createTime = moment().format('YYYY-MM-DD HH:mm:ss')
     await this.repository.save(article)

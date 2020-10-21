@@ -1,5 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToMany, JoinTable } from 'typeorm';
 import { Comment } from '../comment/comment.entity';
+import { Tag } from '../tag/tag.entity';
 const moment = require('moment');
 
 @Entity()
@@ -33,5 +34,7 @@ export class Article {
   comments:Comment[]
 
 
-
+  @ManyToMany(type => Tag, tag => tag.articles)
+  @JoinTable()
+  tags:Tag[]
 }

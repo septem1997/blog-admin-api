@@ -73,7 +73,15 @@ export class Result{
   @fillRes
   static article_plzEnter(){
     return{
-      code: 3001,
+      code: 4001,
+      msg: '请填写标题和内容'
+    }
+  }
+
+  @fillRes
+  static tag_plzEnter(){
+    return{
+      code: 5001,
       msg: '请填写标题和内容'
     }
   }

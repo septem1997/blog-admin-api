@@ -4,7 +4,6 @@ import { Repository } from 'typeorm';
 import { Comment } from './comment.entity';
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { Result } from '../util/result';
-const moment = require('moment');
 
 @Injectable()
 export class CommentService {
@@ -15,28 +14,10 @@ export class CommentService {
   ) {}
 
 
-  // async edit(createCommentDto: CreateCommentDto): Promise<any> {
-  //   let user = new Comment()
-  //   if (createCommentDto.id){  //区分编辑和新增
-  //     user = await this.repository.createQueryBuilder('user')
-  //       .where('user.id = :id', { id: createCommentDto.id })
-  //       .getOne();
-  //   }
-  //   user.content = createCommentDto.content
-  //   user.title = createCommentDto.title
-  //   user.createTime = moment().format('YYYY-MM-DD HH:mm:ss')
-  //   await this.repository.save(user)
-  //   return Result.success()
-  // }
-  //
   async deleteBy(ids: Array<number>): Promise<any> {
     await this.repository.delete(ids)
     return Result.success()
   }
-  //
-  // async getComment(id:number){
-  //   return Result.success(await this.repository.findOne(id))
-  // }
 
 
   async getCommentList(commentDto: CreateCommentDto): Promise<any> {
