@@ -6,11 +6,10 @@ import {
   ManyToMany,
 } from 'typeorm';
 import { Article } from '../article/article.entity';
+import { BaseEntity } from '../common/baseEntity';
 
 @Entity()
-export class Tag {
-  @PrimaryGeneratedColumn()
-  id: number;
+export class Tag extends BaseEntity{
 
   @Column()
   name: string;

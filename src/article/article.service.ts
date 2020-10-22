@@ -37,7 +37,9 @@ export class ArticleService {
   }
 
   async deleteBy(ids: Array<number>): Promise<any> {
-    await this.repository.delete(ids)
+    const list = await this.repository.findByIds(ids);
+    list.forEach(item => item.disabled = true)
+    await this.repository.save(list)
     return Result.success()
   }
 
@@ -49,6 +51,7 @@ export class ArticleService {
   async getArticleList(articleDto: CreateArticleDto): Promise<any> {
     const qb =  this.repository.createQueryBuilder('article')
       .select(['article.id','article.title','article.summary','article.viewNum','article.createTime'])
+      .where('article.disabled = 0')
       if (articleDto.title){
         qb.andWhere('article.title like :title', { title: `%${articleDto.title}%` })
       }

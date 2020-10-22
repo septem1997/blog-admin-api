@@ -1,12 +1,10 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToMany, JoinTable } from 'typeorm';
 import { Comment } from '../comment/comment.entity';
 import { Tag } from '../tag/tag.entity';
-const moment = require('moment');
+import { BaseEntity } from '../common/baseEntity';
 
 @Entity()
-export class Article {
-  @PrimaryGeneratedColumn()
-  id: number;
+export class Article extends BaseEntity{
 
   @Column()
   title: string;
@@ -16,16 +14,6 @@ export class Article {
 
   @Column({type:'text'})
   content: string;
-
-  @Column({type:"datetime", transformer:{
-      from(value: any): any {
-        return moment(value).format('YYYY年MM月DD日 HH:mm:ss')
-      },
-      to(value: any): any {
-        return value
-      }
-    }})
-  createTime:string;
 
   @Column({default:0})
   viewNum:number;

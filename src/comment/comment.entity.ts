@@ -1,25 +1,13 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany, OneToOne, JoinColumn, ManyToOne } from 'typeorm';
 import { User } from '../user/user.entity';
 import { Article } from '../article/article.entity';
-const moment = require('moment');
+import { BaseEntity } from '../common/baseEntity';
 
 @Entity()
-export class Comment {
-  @PrimaryGeneratedColumn()
-  id: number;
+export class Comment extends BaseEntity{
 
   @Column({type:'text'})
   content: string;
-
-  @Column({type:"datetime", transformer:{
-      from(value: any): any {
-        return moment(value).format('YYYY年MM月DD日 HH:mm:ss')
-      },
-      to(value: any): any {
-        return value
-      }
-    }})
-  createTime:string;
 
   @ManyToOne(type => User,user => user.comments)
   user:User

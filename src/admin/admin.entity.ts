@@ -1,9 +1,8 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity } from '../common/baseEntity';
 
 @Entity()
-export class Admin {
-  @PrimaryGeneratedColumn()
-  id: number;
+export class Admin extends BaseEntity{
 
   @Column()
   username: string;

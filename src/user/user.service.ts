@@ -4,7 +4,6 @@ import { Repository } from 'typeorm';
 import { User } from './user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import { Result } from '../util/result';
-const moment = require('moment');
 
 @Injectable()
 export class UserService {

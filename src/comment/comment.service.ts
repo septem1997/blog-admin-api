@@ -15,7 +15,9 @@ export class CommentService {
 
 
   async deleteBy(ids: Array<number>): Promise<any> {
-    await this.repository.delete(ids)
+    const list = await this.repository.findByIds(ids);
+    list.forEach(item => item.disabled = true)
+    await this.repository.save(list)
     return Result.success()
   }
 
@@ -26,6 +28,7 @@ export class CommentService {
       .leftJoinAndSelect("comment.article", "article")
       .select(['comment.id','user.username','article.title','comment.content',
         'comment.createTime'])
+      .where('comment.disabled = 0')
       if (commentDto.content){
         qb.andWhere('comment.content like :content', { content: `%${commentDto.content}%` })
       }

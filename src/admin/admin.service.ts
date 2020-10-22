@@ -11,7 +11,7 @@ export class AdminService {
 
   constructor(
     @InjectRepository(Admin)
-    private adminRepository: Repository<Admin>
+    private repository: Repository<Admin>
   ) {}
 
   register(pass: string):Promise<string> {
@@ -22,7 +22,7 @@ export class AdminService {
   async create(createAdminDto: CreateAdminDto): Promise<any> {
     const query  = new Admin()
     query.username = createAdminDto.username
-    const findAdmin = await this.adminRepository.findOne(query)
+    const findAdmin = await this.repository.findOne(query)
     if (findAdmin){
       return Result.login_accountExist()
     }else {
@@ -30,7 +30,7 @@ export class AdminService {
       const newPass = await this.register(createAdminDto.password)
       admin.username = createAdminDto.username
       admin.password = newPass
-      await this.adminRepository.save(admin)
+      await this.repository.save(admin)
       return Result.success()
     }
 
@@ -38,24 +38,27 @@ export class AdminService {
 
   async updatePassword(admin: Admin, newPwd: string) {
     admin.password = await this.register(newPwd)
-    await this.adminRepository.save(admin)
+    await this.repository.save(admin)
     return Result.success()
   }
 
   async deleteBy(ids: Array<number>): Promise<any> {
-    await this.adminRepository.delete(ids)
+    const list = await this.repository.findByIds(ids);
+    list.forEach(item => item.disabled = true)
+    await this.repository.save(list)
     return Result.success()
   }
 
   async findOne(createAdminDto: CreateAdminDto):Promise<Admin> {
     const query = new Admin()
     query.username = createAdminDto.username
-    return await this.adminRepository.findOne(query)
+    return await this.repository.findOne(query)
   }
 
   async getAdminList(createAdminDto:CreateAdminDto): Promise<any> {
-    const res = await this.adminRepository.createQueryBuilder('admin')
+    const res = await this.repository.createQueryBuilder('admin')
       .select(['admin.id','admin.username'])
+      .where('admin.disabled = 0')
       .skip(createAdminDto.pageSize * (createAdminDto.pageNum - 1))
       .take(createAdminDto.pageSize)
       .getManyAndCount()

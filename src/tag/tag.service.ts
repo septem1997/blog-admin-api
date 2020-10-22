@@ -28,7 +28,9 @@ export class TagService {
 
 
   async deleteBy(ids: Array<number>): Promise<any> {
-    await this.repository.delete(ids);
+    const list = await this.repository.findByIds(ids);
+    list.forEach(item => item.disabled = true)
+    await this.repository.save(list)
     return Result.success();
   }
 
@@ -39,7 +41,8 @@ export class TagService {
   async getTagList(tagDto: CreateTagDto): Promise<any> {
     const qb = this.repository.createQueryBuilder('tag')
       .select(['tag.id', 'tag.name'])
-      .leftJoinAndSelect('tag.articles', 'article')// todo 待改
+      .leftJoinAndSelect('tag.articles', 'article')
+      .where('tag.disabled = 0')// todo 待改
     if (tagDto.name) {
       qb.andWhere('tag.name like :name', { content: `%${tagDto.name}%` });
     }
