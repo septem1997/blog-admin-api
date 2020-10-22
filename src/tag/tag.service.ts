@@ -41,14 +41,14 @@ export class TagService {
   async getTagList(tagDto: CreateTagDto): Promise<any> {
     const qb = this.repository.createQueryBuilder('tag')
       .select(['tag.id', 'tag.name'])
-      .leftJoinAndSelect('tag.articles', 'article')
-      .where('tag.disabled = 0')// todo 待改
+      // .leftJoinAndSelect('tag.articles', 'article') // todo 待改
+      .where('tag.disabled = 0')
     if (tagDto.name) {
       qb.andWhere('tag.name like :name', { content: `%${tagDto.name}%` });
     }
-    if (tagDto.articleTitle) {
-      qb.andWhere('article.title like :articleTitle', { articleTitle: `%${tagDto.articleTitle}%` });
-    }
+    // if (tagDto.articleTitle) {
+    //   qb.andWhere('article.title like :articleTitle', { articleTitle: `%${tagDto.articleTitle}%` });
+    // }
     const res = await qb
       .skip(tagDto.pageSize * (tagDto.pageNum - 1))
       .take(tagDto.pageSize)
